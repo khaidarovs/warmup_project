@@ -12,6 +12,9 @@ I took the spin_in_circles code as a basis for my code. I initialized the node t
 
 ### Gif
 
+https://user-images.githubusercontent.com/93730296/161688333-997192b8-a8ff-44e5-a40e-f3097888beca.mp4
+
+
 ### Challenges
 
 The main challenge was to find a way for the turtlebot to travel for a specific period of time and to make it turn exactly 90 degrees. In order to address the first challenge, I used the rospy.sleep() function that allowed me to do a specific action on the turtlebot for a certain time. For example, it allowed me to move the turtlebot forward for 1 second 4 times, equalling 4 seconds in total, and it also allowed me to rotate the robot for roughly two seconds with an angular speed of 0.7854, to achieve roughly a 90 degree turn. Adding on to the challenge of making the turtlebot turn 90 degrees, I had to utilize the function which states that angular velocity = change in theta (radians) / change in time. This allowed me to calculate the necessary angular velocity and time for rotation needed for a 90 degree turn.
