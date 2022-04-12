@@ -50,17 +50,17 @@ class FollowPerson(object):
         # The first entry in the ranges list corresponds with what's directly
         #   in front of the robot.
         angle_deg = 0
-        for angle, dist in enumerate(data.ranges):
+        for angle, dist in enumerate(data.ranges): #traverse through the scan results; 
             if max_dist > dist >= distance:
-                angle_deg = angle    
+                angle_deg = angle #if person within acceptable range, record the angle
         if angle_deg < 180:
-            self.twist.angular.z = 0.08 * angle_deg
+            self.twist.angular.z = 0.08 * angle_deg #if angle<180 turn left
         else:
-            self.twist.angular.z = 0.08 * (angle_deg - 360)
+            self.twist.angular.z = 0.08 * (angle_deg - 360) #else turn right
         if data.ranges[0] >= distance:  
-            self.twist.linear.x = 0.2
+            self.twist.linear.x = 0.2 #if nothing directly in front, move forward
         else:
-            self.twist.linear.x = 0
+            self.twist.linear.x = 0 #else stop
         self.robot_movement_pub.publish(self.twist)
 
     def run(self):
