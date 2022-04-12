@@ -15,15 +15,42 @@ I took the spin_in_circles code as a basis for my code. I initialized the node t
 https://user-images.githubusercontent.com/93730296/161688333-997192b8-a8ff-44e5-a40e-f3097888beca.mp4
 
 
-### Challenges
+## Person Follower
 
-The main challenge was to find a way for the turtlebot to travel for a specific period of time and to make it turn exactly 90 degrees. In order to address the first challenge, I used the rospy.sleep() function that allowed me to do a specific action on the turtlebot for a certain time. For example, it allowed me to move the turtlebot forward for 1 second 4 times, equalling 4 seconds in total, and it also allowed me to rotate the robot for roughly two seconds with an angular speed of 0.7854, to achieve roughly a 90 degree turn. Adding on to the challenge of making the turtlebot turn 90 degrees, I had to utilize the function which states that angular velocity = change in theta (radians) / change in time. This allowed me to calculate the necessary angular velocity and time for rotation needed for a 90 degree turn.
+### High-level description
+
+I approached this task as being a modification of the line_follower code from Lab B. The idea was to determine the angle and direction in which the person was standing, set angular velocity to turn in that direction and keep the turtlebot moving by setting x-linear velocity. 
+
+### Code explanation
+
+I took the line_follower code as a basis for my code. I initialized the node to "follow_person", initialized the subscriber to the /scan topic and the publisher to publish Twist messages to the /cmd_vel topic. The process_scan() callback function analyzes the direction in which the robot should be moving, sets the angular and linear velocities and publishes the commands. The idea was to find the angle at which the distance reported by the scan sensor is within the acceptable range (within 2 metres from the robot). Then depending on whether this angle was more or less than 180 degrees, the robot would have negative and positive angular velocities respectively, with magnitude being proportional to how many degrees the robot should turn. The run() function just kept the program running.
+
+### Gif
+
+
+## Wall Follower
+
+### High-level description
+
+I approached this task in a similar way to person follower. The idea was to first find a wall, move to it, and then start following it, adjusting the course of movement along the way, depending on where exactly the wall was relative to the turtlebot. 
+
+### Code explanation
+
+I took the line_follower and person_follower codes as a basis for my code. I initialized the node to "follow_wall", initialized the subscriber to the /scan topic and the publisher to publish Twist messages to the /cmd_vel topic. The process_scan() callback function analyzes the direction in which the robot should be moving, sets the angular and linear velocities and publishes the commands. The idea was to find the minimum non-zero distance to the nearest wall, the direction of the wall and start moving towards it. This happens in the first if-branch of my code and is very similar to the person-follower code. Once the robot is within the acceptable range of the wall, it starts correcting its course based on how it is positioned relative to the wall. If the angle at which the minimum distance to the wall is recorded, is less than 90 degrees (robot is turned towards the wall) the angular velocity is negative so that it would turn right away from the wall. The same logic applies when the angle is more than 90 degrees. The run() function just kept the program running.
+
+### Gif
+
+
+
+## Challenges
+
+The main challenge of the project was to get used to the controls and how we should interact with the turtlebot. More specifically, I found the adaptive behaviour that we had to deal with very challenging to program. When the turtlebot has to alter its behavior (speed, anglular velocity, etc.) based on the information it receives from the environment, it has quite hard at first to understand how to exactly program it. The challenge for was that I was thinking sequentially, meaning that I tried to program every single behavior (move forward, turn, etc.) that the turtlebot had to perform, instead of making the behaviour adaptive and autonomous. The last two parts of the project really helped me to understand how to work with this kind of adaptive behavior and in my case I used the angles and distances reported by the scan topic to alter the direction of movement of the robot accordingly.
 
 ### Future work
 
-If I had more time, I would experiment more with the angle of rotation. In a few cases, the turtlebot would not turn 90 degrees, but would turn a bit more or less, resulting in non-square movement. I would also want to see how different surfaces affect how fast the robot is turning - I noticed that when one of its wheels was on the yellow tape in the lab, it made a turn of more than 90 degress, perhaps due to less friction than on the lab floor. 
+If I had more time, I would definitely experiment with making the rotations of the turtlebot more smooth, which would apply to all three parts of this project. In the case of the person_follower and wall_follower, I would definitely account more for the noise in the environment (mistaking a chair for a person, etc.) and try to make the code more robust to instances such as people walking around while the robot is trying to follow me. I would also want to see how different surfaces affect how fast the robot is turning - I noticed that when one of its wheels was on the yellow tape in the lab, it made a turn of more than 90 degress, perhaps due to less friction than on the lab floor.
 
 ### Takeaways
 
 - My first takeaway is the general framework of how the turtlebot works. I learned about the sending messages to a specific topic functionality and how to make the robot move in the simplest ways using the /cmd_vel topic. I also had a chance to play around with physical turtlebots and learned how to interact with them, which would definitely be very useful for future projects.
-- Another takeaway is learning how to write code in an object-oriented way, initializing the nodes and publishes, and writing methods. This is definitely a cleaner way to write code and will be extremely useful in future projects. 
+- Another takeaway is learning how to write code in an object-oriented way, initializing the nodes and publishers, and writing methods. This is definitely a cleaner way to write code and will be extremely useful in future projects. 
