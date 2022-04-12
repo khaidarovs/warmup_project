@@ -14,9 +14,8 @@ from sensor_msgs.msg import LaserScan
 from geometry_msgs.msg import Twist
 from geometry_msgs.msg import Vector3
 
-# How close we will get to person and max distance to person.
+# How close we will get to wall and error range to operate within
 distance = 0.4
-max_dist = 2
 error = 0.1
 
 class FollowWall(object):
@@ -46,33 +45,26 @@ class FollowWall(object):
 
         non_zero_list = []
         non_zero_angle = []
-        for angle, dist in enumerate(data.ranges):
+        for angle, dist in enumerate(data.ranges): #find non-zero distances in ranges
             if dist != 0:
                 non_zero_list.append(dist)
                 non_zero_angle.append(angle)
         min_distance = min(non_zero_list)
-        angle = non_zero_angle[non_zero_list.index(min(non_zero_list))]
-        print("min distance is", min_distance)
+        angle = non_zero_angle[non_zero_list.index(min(non_zero_list))] #find the min distance to wall and direction
+        print("minimum distance is", min_distance)
         if min_distance > (distance + error): #need to find a wall
-            print("In branch 1")
-            angle_deg = angle
-            # for angle, dist in enumerate(data.ranges):
-            #     if dist >= distance:
-            #         angle_deg = angle    
-            if angle_deg < 180:
-                self.twist.angular.z = 0.08 * angle_deg
+            print("Looking for wall")
+            if angle < 180:
+                self.twist.angular.z = 0.08 * angle
             else:
-                self.twist.angular.z = 0.08 * (angle_deg - 360)
+                self.twist.angular.z = 0.08 * (angle - 360) #use similar logic as in person_follower
         else: #got close enough to the wall to start following
-            print("in branch 2")
+            print("Near the wall")
+            # when next to the wall, if turtlebot is tilted towards the wall, make a right turn, and vice versa
             if angle < 90: 
-                self.twist.angular.z = 0.008 * (angle - 90)
+                self.twist.angular.z = 0.008 * (angle - 90) 
             elif 180 > angle > 90:
                 self.twist.angular.z = 0.008 * angle
-            # if min_distance <= distance:
-            #     self.twist.angular.z = 0.02 * (angle - 360)
-            # else:
-            #     self.twist.angular.z = 0.02 * angle
         self.twist.linear.x = 0.05 
         self.robot_movement_pub.publish(self.twist)
 
