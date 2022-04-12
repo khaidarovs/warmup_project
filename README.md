@@ -29,6 +29,8 @@ I took the line_follower code as a basis for my code. I initialized the node to 
 
 https://user-images.githubusercontent.com/93730296/162892061-b7ec4cd9-093f-4edf-b5e8-a3c029195faa.mov
 
+Google Docs Link: https://drive.google.com/file/d/1RyTVo2hcVXV8qTvKlvAq9G7lvbwvQK82/view?usp=sharing
+
 
 ## Wall Follower
 
@@ -44,6 +46,7 @@ I took the line_follower and person_follower codes as a basis for my code. I ini
 
 https://user-images.githubusercontent.com/93730296/162894500-49fa6b70-1b8c-48e0-997a-3cd2b25917bd.mp4
 
+Google Docs Link: https://drive.google.com/file/d/15NdPGwt9ep_YBuyqFlUIUVkyS5DjekXc/view?usp=sharing
 
 ## Challenges
 
