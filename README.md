@@ -28,6 +28,9 @@ I took the line_follower code as a basis for my code. I initialized the node to 
 ### Gif
 
 
+https://user-images.githubusercontent.com/93730296/162892061-b7ec4cd9-093f-4edf-b5e8-a3c029195faa.mov
+
+
 ## Wall Follower
 
 ### High-level description
@@ -40,17 +43,17 @@ I took the line_follower and person_follower codes as a basis for my code. I ini
 
 ### Gif
 
-
+https://user-images.githubusercontent.com/93730296/162893959-b71ceebe-6593-4e28-9a6d-59be604c9411.mp4
 
 ## Challenges
 
 The main challenge of the project was to get used to the controls and how we should interact with the turtlebot. More specifically, I found the adaptive behaviour that we had to deal with very challenging to program. When the turtlebot has to alter its behavior (speed, anglular velocity, etc.) based on the information it receives from the environment, it has quite hard at first to understand how to exactly program it. The challenge for was that I was thinking sequentially, meaning that I tried to program every single behavior (move forward, turn, etc.) that the turtlebot had to perform, instead of making the behaviour adaptive and autonomous. The last two parts of the project really helped me to understand how to work with this kind of adaptive behavior and in my case I used the angles and distances reported by the scan topic to alter the direction of movement of the robot accordingly.
 
-### Future work
+## Future work
 
 If I had more time, I would definitely experiment with making the rotations of the turtlebot more smooth, which would apply to all three parts of this project. In the case of the person_follower and wall_follower, I would definitely account more for the noise in the environment (mistaking a chair for a person, etc.) and try to make the code more robust to instances such as people walking around while the robot is trying to follow me. I would also want to see how different surfaces affect how fast the robot is turning - I noticed that when one of its wheels was on the yellow tape in the lab, it made a turn of more than 90 degress, perhaps due to less friction than on the lab floor.
 
-### Takeaways
+## Takeaways
 
 - My first takeaway is the general framework of how the turtlebot works. I learned about the sending messages to a specific topic functionality and how to make the robot move in the simplest ways using the /cmd_vel topic. I also had a chance to play around with physical turtlebots and learned how to interact with them, which would definitely be very useful for future projects.
 - Another takeaway is learning how to write code in an object-oriented way, initializing the nodes and publishers, and writing methods. This is definitely a cleaner way to write code and will be extremely useful in future projects. 
