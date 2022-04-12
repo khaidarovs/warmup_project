@@ -27,7 +27,6 @@ I took the line_follower code as a basis for my code. I initialized the node to 
 
 ### Gif
 
-
 https://user-images.githubusercontent.com/93730296/162892061-b7ec4cd9-093f-4edf-b5e8-a3c029195faa.mov
 
 
@@ -43,7 +42,8 @@ I took the line_follower and person_follower codes as a basis for my code. I ini
 
 ### Gif
 
-https://user-images.githubusercontent.com/93730296/162893959-b71ceebe-6593-4e28-9a6d-59be604c9411.mp4
+https://user-images.githubusercontent.com/93730296/162894500-49fa6b70-1b8c-48e0-997a-3cd2b25917bd.mp4
+
 
 ## Challenges
 
